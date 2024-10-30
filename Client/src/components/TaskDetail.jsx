@@ -5,8 +5,19 @@ function TaskDetail({ task, onClose, onDelete, onEdit }) {
     const [newTitle, setNewTitle] = useState(task.title);
 
     const handleSaveChanges = () => {
-        onEdit(task.id, newTitle);
-        onClose(); 
+        if (newTitle.trim()) {
+            onEdit(task.id, newTitle);
+            onClose(); 
+        } else {
+            alert('Task title cannot be empty.'); // Optional: Alert for empty title
+        }
+    };
+
+    // Function to handle key down events
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSaveChanges(); // Call handleSaveChanges if Enter is pressed
+        }
     };
 
     return (
@@ -20,6 +31,7 @@ function TaskDetail({ task, onClose, onDelete, onEdit }) {
                     type="text" 
                     value={newTitle} 
                     onChange={(e) => setNewTitle(e.target.value)} 
+                    onKeyDown={handleKeyDown} // Add key down event here
                     className="task-input-field"
                 />
                 <div className="modal-buttons">

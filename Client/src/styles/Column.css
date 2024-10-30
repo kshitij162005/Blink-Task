@@ -1,6 +1,8 @@
+/* Column.css */
 .column {
     display: flex;
     flex-direction: column;
+
     padding: 1rem;
     background-color: #393E46; 
     border-radius: 8px;
@@ -63,7 +65,10 @@ h2 {
     flex-grow: 1; 
 }
 
-
 .task-card {
     margin-bottom: 1rem; 
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
