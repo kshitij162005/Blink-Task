@@ -1,34 +1,38 @@
+/* MainPage.css */
 .main-page {
     display: flex;
     width: 100vw;
-    min-height: 100vh;
-    height: auto;
-    overflow: hidden;
+    height: 97vh;
 }
 
 .sidebar {
-    width: 200px;
-    padding: 1.5rem;
-    background-color: #222831;
-    color: #EEEEEE;
-    border-right: 1px solid #393E46;
+    width: 10%; /* Adjusted width */
+    background-color: #222831; 
+    color: #EEEEEE; 
+    border-right: 1px solid #393E46; 
+    transition: background-color 0.3s, color 0.3s; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); 
+    height: 94vh;
 }
 
 .sidebar ul {
-    list-style: none;
+    list-style: none; 
     padding: 0;
 }
 
 .sidebar ul li {
-    font-weight: bold;
-    color: #EEEEEE;
-    margin-bottom: 1.2rem;
-    cursor: pointer;
-    transition: color 0.3s;
+    font-weight: bold; 
+    color: #EEEEEE; 
+    margin-bottom: 1.2rem; 
+    cursor: pointer; 
+    transition: color 0.3s, background-color 0.3s; 
+    padding: 0.5rem 1rem; 
+    border-radius: 5px; 
 }
 
 .sidebar ul li:hover {
-    color: #00ADB5; 
+    background-color: #00ADB5; 
+    color: #222831; 
 }
 
 .task-content {
@@ -38,16 +42,15 @@
     padding: 1rem;
     background-color: #EEEEEE;
     color: #222831;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
     gap: 1rem;
+    max-height: 10vh;
 }
-
 
 .dark .task-content {
     background-color: #222831;
     color: #EEEEEE;
 }
-
 
 input[type="text"] {
     padding: 0.5rem;
@@ -80,10 +83,17 @@ input[type="text"]:focus {
 
 .completed-tasks {
     background-color: #EEEEEE;
+    width: 20%;
     padding: 1rem;
     border-left: 1px solid #009B9A;
     border-top: 1px solid #009B9A;
     border-bottom: 1px solid #009B9A;
+    overflow-y: auto; 
+    height: 90vh; 
+}
+
+.completed-tasks h2 {
+    margin: 0 0 10px 0;
 }
 
 .completed-task {
@@ -109,39 +119,41 @@ input[type="text"]:focus {
     background-color: #e60000; 
 }
 
-
-.sidebar {
-    width: 250px; 
-    padding: 1.5rem;
-    background-color: #222831; 
-    color: #EEEEEE; 
-    border-right: 1px solid #393E46; 
-    transition: background-color 0.3s, color 0.3s; 
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); 
+/* Custom scrollbar styles */
+.task-content::-webkit-scrollbar {
+    width: 12px; /* Slightly wider for a better grip */
 }
 
-.sidebar ul {
-    list-style: none; 
-    padding: 0;
+.task-content::-webkit-scrollbar-track {
+    background: #393E46; /* Track color for better contrast */
+    border-radius: 6px; /* Rounded corners */
 }
 
-.sidebar ul li {
-    font-weight: bold; 
-    color: #EEEEEE; 
-    margin-bottom: 1.2rem; 
-    cursor: pointer; 
-    transition: color 0.3s, background-color 0.3s; 
-    padding: 0.5rem 1rem; 
-    border-radius: 5px; 
+.task-content::-webkit-scrollbar-thumb {
+    background: #00ADB5; /* Handle color */
+    border-radius: 6px; /* Rounded corners */
+    border: 3px solid #222831; /* Border around the thumb */
 }
 
-.sidebar ul li:hover {
-    background-color: #00ADB5; 
-    color: #222831; 
+.task-content::-webkit-scrollbar-thumb:hover {
+    background: #009B9A; /* Handle color on hover */
 }
 
+/* For dark mode */
+.dark .task-content::-webkit-scrollbar-track {
+    background: #222831; /* Dark mode track color */
+}
 
+.dark .task-content::-webkit-scrollbar-thumb {
+    background: #00ADB5; /* Dark mode handle color */
+    border: 3px solid #393E46; /* Dark mode border around the thumb */
+}
 
+.dark .task-content::-webkit-scrollbar-thumb:hover {
+    background: #009B9A; /* Dark mode handle color on hover */
+}
+
+/* Animation for task completion */
 @keyframes slide-in {
     from {
         transform: translateY(-20px);

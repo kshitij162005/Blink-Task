@@ -1,4 +1,3 @@
-
 import React from 'react';
 import TaskCard from './TaskCard';
 import '../styles/Column.css';
@@ -19,6 +18,12 @@ function Column({ title, tasks, setSelectedTask, input, setInput, onAddTask, onD
             setInput(''); 
         } else {
             alert('Please enter a task.'); 
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleAddTask(); // Call handleAddTask if Enter is pressed
         }
     };
 
@@ -49,6 +54,7 @@ function Column({ title, tasks, setSelectedTask, input, setInput, onAddTask, onD
                     placeholder="Add a task..." 
                     value={input} 
                     onChange={(e) => setInput(e.target.value)} 
+                    onKeyDown={handleKeyDown} // Add the key down event here
                     className="task-input-field" 
                 />
                 <button 

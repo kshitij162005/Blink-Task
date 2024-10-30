@@ -1,10 +1,11 @@
+// MainPage.js
 import React, { useState, useEffect } from 'react';
 import Column from '../components/Coloumn'; 
 import TaskDetail from '../components/TaskDetail';
 import Modal from '../components/Modal';
 import '../styles/MainPage.css';
 
-let nextId = 1; // Start your ID counter from 1 for simplicity
+let nextId = 1;
 
 function MainPage() {
     const [tasks, setTasks] = useState([]);
@@ -20,8 +21,8 @@ function MainPage() {
             .then(response => response.json())
             .then(data => {
                 const tasksWithUniqueIds = data
-                    .slice(0, 7) 
-                    .filter(task => !task.completed) 
+                    .slice(0, 9)
+                    .filter(task => !task.completed)
                     .map(task => ({
                         ...task,
                         id: nextId++,
@@ -72,7 +73,6 @@ function MainPage() {
     const handleCompleteTask = (taskId) => {
         setTasks(prevTasks => {
             const taskToComplete = prevTasks.find(task => task.id === taskId);
-    
             if (taskToComplete) {
                 const isAlreadyCompleted = completedTasks.some(task => task.id === taskId);
                 if (!isAlreadyCompleted) {
@@ -87,10 +87,9 @@ function MainPage() {
         });
     
         setTodayTasks(prevTodayTasks => prevTodayTasks.filter(task => task.id !== taskId));
-    
         setModal({ show: true, message: 'Task marked as completed', type: 'success' });
     };
-    
+
     const clearCompletedTasks = () => {
         setCompletedTasks([]);
         setModal({ show: true, message: 'All completed tasks have been cleared', type: 'success' });
@@ -98,13 +97,18 @@ function MainPage() {
 
     const toggleTodayView = () => setShowToday(prevShowToday => !prevShowToday);
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleAddTask(showToday);
+        }
+    };
+
     return (
         <div className="main-page">
             <aside className="sidebar">
                 <ul>
                     <li onClick={() => setShowToday(false)}>All</li>
                     <li onClick={toggleTodayView}>Today</li>
-                    {/* <li>Inbox</li> */}
                 </ul>
             </aside>
             <div className="task-content">
@@ -117,6 +121,7 @@ function MainPage() {
                     input={input} 
                     setInput={setInput} 
                     onCompleteTask={handleCompleteTask} 
+                    onKeyDown={handleKeyDown} 
                 />
                 {selectedTask && (
                     <TaskDetail 
@@ -141,11 +146,13 @@ function MainPage() {
                         Clear Completed Tasks
                     </button>
                 )}
-                {completedTasks.map(task => (
-                    <div key={task.id} className="completed-task">
-                        <p>{task.title}</p>
-                    </div>
-                ))}
+                <div className="completed-task-list">
+                    {completedTasks.map(task => (
+                        <div key={task.id} className="completed-task">
+                            <p>{task.title}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
