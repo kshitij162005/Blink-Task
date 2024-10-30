@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainPage from './Pages/MainPage';
+import MainPage from './pages/MainPage';
 import './index.css';
 
 function App() {
